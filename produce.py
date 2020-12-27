@@ -55,8 +55,14 @@ RESERVED = [
     IPv4Network('224.0.0.0/4'),
     IPv4Network('100.64.0.0/10'),
 ]
+RESERVED_V6 = []
 if args.exclude:
-    RESERVED += [IPv4Network(e) for e in args.exclude]
+    for e in args.exclude:
+        if ":" in e:
+            RESERVED_V6.append(IPv6Network(e))
+
+        else:
+            RESERVED.append(IPv4Network(e))
 
 IPV6_UNICAST = IPv6Network('2000::/3')
 
@@ -91,6 +97,7 @@ with open("ipv4-address-space.csv", newline='') as f:
 # get rid of reserved addresses
 subtract_cidr(root, RESERVED)
 
+# IPv6
 with open("delegated-apnic-latest") as f:
     for line in f:
         if "apnic|CN|ipv4|" in line:
@@ -104,6 +111,8 @@ with open("delegated-apnic-latest") as f:
             a = "%s/%s" % (line[3], line[4])
             a = IPv6Network(a)
             subtract_cidr(root_v6, (a,))
+# get rid of reserved addresses
+subtract_cidr(root_v6, RESERVED_V6)
 
 with open("routes4.conf", "w") as f:
     dump_bird(root, f)
