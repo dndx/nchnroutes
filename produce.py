@@ -71,6 +71,12 @@ def subtract_cidr(sub_from, sub_by):
         for n in sub_from:
             if n.cidr == cidr_to_sub:
                 n.parent.child.remove(n)
+
+                # special case, if parent became the leaf, then we must
+                # re subtract the CIDR from it, otherwise parent will be
+                # incorrectly exported
+                if len(n.parent.child) == 0:
+                    subtract_cidr(n.parent.parent.child, sub_by)
                 break
 
             if n.cidr.supernet_of(cidr_to_sub):
