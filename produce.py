@@ -94,10 +94,7 @@ with open("ipv4-address-space.csv", newline='') as f:
             block = cidr[0]
             cidr = "%s.0.0.0%s" % (block[:3].lstrip("0"), block[-2:], )
             root.append(Node(IPv4Network(cidr)))
-# get rid of reserved addresses
-subtract_cidr(root, RESERVED)
 
-# IPv6
 with open("delegated-apnic-latest") as f:
     for line in f:
         if "apnic|CN|ipv4|" in line:
@@ -111,6 +108,9 @@ with open("delegated-apnic-latest") as f:
             a = "%s/%s" % (line[3], line[4])
             a = IPv6Network(a)
             subtract_cidr(root_v6, (a,))
+
+# get rid of reserved addresses
+subtract_cidr(root, RESERVED)
 # get rid of reserved addresses
 subtract_cidr(root_v6, RESERVED_V6)
 
