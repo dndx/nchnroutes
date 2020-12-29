@@ -20,3 +20,14 @@ optional arguments:
                         next hop for where non-China IP address, this is
                         usually the tunnel interface
 ```
+
+If you want to run this automatically, you can first edit `Makefile` and uncomment the BIRD reload code
+at the end, then:
+
+```
+sudo crontab -e
+```
+
+and add `0 0 * * 0 make -C /path/to/nchnroutes` to the file.
+
+This will re generate the table every Sunday at midnight and reload BIRD afterwards.
