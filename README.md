@@ -5,6 +5,10 @@ China and generates result in BIRD static route format
 
 Both IPv4 and IPv6 are supported.
 
+As of Dec 2020, the size of generated table is roughly 11000 entries for IPv4 and 14000 for
+IPv6. On a Raspberry Pi 4 with BIRD, full loading and convergence over OSPF with RouterOS running
+on Mikrotik hEX takes around 5 seconds.
+
 Requires Python 3, no additional dependencies.
 
 ```
