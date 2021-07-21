@@ -32,14 +32,14 @@ optional arguments:
   --ipv4-list [{apnic,ipip} [{apnic,ipip} ...]]
                         IPv4 lists to use when subtracting China based IP,
                         multiple lists can be used at the same time (default:
-                        ipip)
+                        apnic ipip)
 ```
 
 To specify China IPv4 list to use, use the `--ipv4-list` as the following:
 
-* `python3 produce.py --ipv4-list ipip` - only use list [from ipip.net](https://github.com/17mon/china_ip_list) **(default)**
+* `python3 produce.py --ipv4-list ipip` - only use list [from ipip.net](https://github.com/17mon/china_ip_list)
 * `python3 produce.py --ipv4-list apnic` - only use list [from APNIC](https://ftp.apnic.net/stats/apnic/delegated-apnic-latest)
-* `python3 produce.py --ipv4-list apnic ipip` - use both lists
+* `python3 produce.py --ipv4-list apnic ipip` - use both lists **(default)**
 
 If you want to run this automatically, you can first edit `Makefile` and uncomment the BIRD reload code
 at the end, then:

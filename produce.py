@@ -10,8 +10,8 @@ parser.add_argument('--exclude', metavar='CIDR', type=str, nargs='*',
                     help='IPv4 ranges to exclude in CIDR format')
 parser.add_argument('--next', default="wg0", metavar = "INTERFACE OR IP",
                     help='next hop for where non-China IP address, this is usually the tunnel interface')
-parser.add_argument('--ipv4-list', choices=['apnic', 'ipip'], default=['ipip'], nargs='*',
-                    help='IPv4 lists to use when subtracting China based IP, multiple lists can be used at the same time (default: ipip)')
+parser.add_argument('--ipv4-list', choices=['apnic', 'ipip'], default=['apnic', 'ipip'], nargs='*',
+                    help='IPv4 lists to use when subtracting China based IP, multiple lists can be used at the same time (default: apnic ipip)')
 
 args = parser.parse_args()
 
