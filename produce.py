@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import argparse
-import urllib.request
 import csv
 from ipaddress import IPv4Network, IPv6Network
 import math
